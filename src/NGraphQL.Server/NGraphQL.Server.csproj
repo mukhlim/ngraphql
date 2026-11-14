@@ -9,7 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="Irony" Version="1.5.3" />
-        <PackageReference Include="System.Text.Json" Version="8.0.4" />
+        <PackageReference Include="System.Text.Json" Version="10.0.15" />
     </ItemGroup>
 
     <ItemGroup>
