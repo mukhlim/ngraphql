@@ -1,0 +1,21 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../ChangeLog.md" />
+    <File Path="../ReadMe.md" />
+    <File Path="Common.proj" />
+    <File Path="Packages.proj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/NGraphQL.Tests.HttpTests/NGraphQL.Tests.HttpTests.csproj" />
+    <Project Path="Tests/NGraphQL.Tests/NGraphQL.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Tests/TestApp/">
+    <Project Path="Tests/TestApp/Things.App/Things.App.csproj" />
+    <Project Path="Tests/TestApp/Things.GraphQL.HttpServer/Things.GraphQL.HttpServer.csproj" />
+    <Project Path="Tests/TestApp/Things.GraphQL/Things.GraphQL.csproj" />
+  </Folder>
+  <Project Path="NGraphQL.Client/NGraphQL.Client.csproj" />
+  <Project Path="NGraphQL.Server.AspNetCore/NGraphQL.Server.AspNetCore.csproj" />
+  <Project Path="NGraphQL.Server/NGraphQL.Server.csproj" />
+  <Project Path="NGraphQL/NGraphQL.csproj" />
+</Solution>
