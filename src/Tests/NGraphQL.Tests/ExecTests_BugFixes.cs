@@ -20,7 +20,7 @@ namespace NGraphQL.Tests {
       query = @"
 query { 
   dv: decTimesTwo(dec: decInp)
-}".Replace("decInp", decInp.ToString());
+}".Replace("decInp", decInp.ToString(System.Globalization.CultureInfo.InvariantCulture));
       resp = await ExecuteAsync(query);
       var res = (decimal) resp.Data["dv"];
       Assert.AreEqual(decInp * 2, res, "dec * 2 does not match.");
@@ -31,7 +31,7 @@ query {
       query = @"
 query { 
   dv: decTimesTwo(dec: decInp)
-}".Replace("decInp", decInp.ToString());
+}".Replace("decInp", decInp.ToString(System.Globalization.CultureInfo.InvariantCulture));
       resp = await ExecuteAsync(query);
       res = (decimal)resp.Data["dv"];
       Assert.AreEqual(decInp * 2, res, "dec * 2 does not match.");

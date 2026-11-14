@@ -32,7 +32,7 @@ namespace NGraphQL.Core.Scalars {
     public override string ToSchemaDocString(object value) {
       if(value == null)
         return "null";
-      var strValue = (value is string str) ? str : value.ToString();
+      var strValue = (value is string str) ? str : System.Convert.ToString(value, System.Globalization.CultureInfo.InvariantCulture);
       if(strValue.IndexOfAny(_charsToEscape) >= 0)
         strValue = strValue.Replace("\\", "\\\\").Replace("\"", "\\\"");
       return _dquote + strValue + _dquote; 

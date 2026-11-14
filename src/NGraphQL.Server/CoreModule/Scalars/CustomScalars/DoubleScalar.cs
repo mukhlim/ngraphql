@@ -17,7 +17,7 @@ namespace NGraphQL.Core.Scalars {
           return null;
 
         case TermNames.Number:
-          if(double.TryParse(token.Text, out var value))
+          if(double.TryParse(token.Text, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var value))
             return value;
           break;
       }

@@ -20,7 +20,7 @@ namespace NGraphQL.Core.Scalars {
         case TermNames.StrSimple:
         case TermNames.Qstr:
           var vstr = (string) token.ParsedValue; //parser does all char escaping 
-          if(DateTime.TryParse(vstr, out var value))
+          if(DateTime.TryParse(vstr, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out var value))
             return value;
           break;
       }
@@ -41,7 +41,7 @@ namespace NGraphQL.Core.Scalars {
       switch (value) {
         case DateTime dt: return dt;
         case string s:
-          if (DateTime.TryParse(s, out var d))
+          if (DateTime.TryParse(s, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out var d))
             return d;
           break;
       }

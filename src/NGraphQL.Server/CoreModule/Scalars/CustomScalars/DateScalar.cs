@@ -23,7 +23,7 @@ namespace NGraphQL.Core.Scalars {
       switch (value) {
         case DateTime dt: return dt.Date;
         case string s:
-          if (DateTime.TryParse(s, out var d))
+          if (DateTime.TryParse(s, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out var d))
             return d.Date;
           throw new Exception($"Invalid Date value: '{value}'");
         default:

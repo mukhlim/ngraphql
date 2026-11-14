@@ -61,16 +61,20 @@ public class ThingsResolvers : IResolverClass {
 
   public string EchoInputValues(IFieldContext context, bool boolVal, int intVal, float floatVal, string strVal, 
                        ThingKind kindVal) {
-    var result = string.Join("|", new object[] { boolVal, intVal, floatVal, strVal, kindVal });
+    var result = JoinInvariant(boolVal, intVal, floatVal, strVal, kindVal);
     return result;
+  }
+
+  // echo results are compared with expected strings in tests, so format numbers independent of current culture
+  private static string JoinInvariant(params object[] values) {
+    return string.Join("|", values.Select(v => Convert.ToString(v, System.Globalization.CultureInfo.InvariantCulture)));
   }
 
   public string EchoInputValuesWithNulls(IFieldContext context,
        bool? boolVal, long? longVal, double? doubleVal, [Null] string strVal,
        [DeprecatedDir("KindVal is deprecated")] ThingKind? kindVal, //just demo of @deprecated directive
        TheFlags? flags) {
-    var doubleStr = doubleVal.ToString();// $"{doubleVal:0.00}"; // cut off fraction digits
-    var result = string.Join("|", new object[] { boolVal, longVal, doubleStr, strVal, kindVal, flags });
+    var result = JoinInvariant(boolVal, longVal, doubleVal, strVal, kindVal, flags);
     return result;
   }
 
@@ -107,7 +111,7 @@ public class ThingsResolvers : IResolverClass {
   }
 
   public string EchoCustomScalars(IFieldContext context, decimal dec, Guid uuid) {
-    return string.Join("|", dec, uuid);
+    return JoinInvariant(dec, uuid);
   }
 
   public string EchoDateTimeScalars(IFieldContext context, DateTime dt, DateTime date, TimeSpan time) {

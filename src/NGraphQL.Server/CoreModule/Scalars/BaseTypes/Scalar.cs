@@ -46,7 +46,8 @@ namespace NGraphQL.Core.Scalars {
     public virtual string ToSchemaDocString(object value) {
       if (value == null)
         return "null";
-      return value.ToString();
+      // invariant culture: GraphQL number literals always use '.' as decimal separator
+      return System.Convert.ToString(value, System.Globalization.CultureInfo.InvariantCulture);
     }
 
     public virtual object ToOutput(IFieldContext context, object value) {
