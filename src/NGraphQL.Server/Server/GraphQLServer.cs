@@ -28,6 +28,8 @@ namespace NGraphQL.Server {
     public readonly RequestCache RequestCache;
     public readonly SubscriptionManager Subscriptions;
     public RequestQuota DefaultRequestQuota = new RequestQuota(); //init with default values
+    /// <summary>Hooks called before field resolvers, for ex. for authorization. Register before the first request. </summary>
+    public readonly IList<IFieldResolvingHook> FieldResolvingHooks = new List<IFieldResolvingHook>();
     public IList<string> StartupErrors => Model?.Errors ?? Array.Empty<string>();
 
     public GraphQLApiModel Model { get; internal set; }

@@ -35,6 +35,7 @@ namespace NGraphQL.Server.Execution {
     internal IList<OutputObjectScope> AllParentScopes = OutputObjectScope.EmptyList;
     internal IList<OutputObjectScope> AllResultScopes = OutputObjectScope.EmptyList;
     internal bool BatchResultWasSet;
+    internal bool ResolvingHooksInvoked;
     OperationFieldExecuter _executer { get; }
 
     public bool Skip;

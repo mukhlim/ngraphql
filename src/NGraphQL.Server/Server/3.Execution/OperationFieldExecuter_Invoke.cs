@@ -18,6 +18,8 @@ namespace NGraphQL.Server.Execution {
       try {
         // Invoke resolver
         object result;
+        if (!fieldContext.ResolvingHooksInvoked)
+          await InvokeFieldResolvingHooksAsync(fieldContext);
         var fldParScope = fieldContext.CurrentParentScope;
         if (fldParScope.IsSubscriptionNextTopScope) // special case for Subscription
           result = fldParScope.SubscriptionNextResolverResult;
@@ -56,6 +58,17 @@ namespace NGraphQL.Server.Execution {
         Fail();
         return null; //never happens
       }
+    }
+
+    // called once per field context (field at one execution level), before the first resolver call
+    private async Task InvokeFieldResolvingHooksAsync(FieldContext fieldContext) {
+      fieldContext.ResolvingHooksInvoked = true;
+      var hooks = _requestContext.Server.FieldResolvingHooks;
+      if (hooks.Count == 0)
+        return;
+      var resolver = fieldContext.MappedField.Resolver;
+      foreach (var hook in hooks)
+        await hook.OnFieldResolvingAsync(fieldContext, resolver);
     }
 
     private async Task<object> InvokeResolverMethodAsync(FieldContext fieldContext) {
